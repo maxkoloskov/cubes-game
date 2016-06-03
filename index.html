@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cubes</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1 class="title">Cubes Game</h1>
+    </div>
+    <div class="info">
+        <div class="scores">
+            <div class="total-score">
+                Total score: <span id="total-score">0</span>
+            </div>
+            <div class="block-score">
+                Block score: <span id="block-score">0</span>
+            </div>
+        </div>
+        <div class="counters">
+            <div class="cube-counter">
+                <div class="cube-pic cube-type-1"></div>
+                <span class="cube-count" id="cc1">0</span>
+            </div>
+            <div class="cube-counter">
+                <div class="cube-pic cube-type-2"></div>
+                <span class="cube-count" id="cc2">0</span>
+            </div>
+            <div class="cube-counter">
+                <div class="cube-pic cube-type-3"></div>
+                <span class="cube-count" id="cc3">0</span>
+            </div>
+            <div class="cube-counter">
+                <div class="cube-pic cube-type-4"></div>
+                <span class="cube-count" id="cc4">0</span>
+            </div>
+            <div class="cube-counter">
+                <div class="cube-pic cube-type-5"></div>
+                <span class="cube-count" id="cc5">0</span>
+            </div>
+        </div>
+
+        <a id="btn-restart">Restart</a>
+    </div>
+
+    <div class="game" >
+        <div id="message-over" class="message-over">
+            <p class="message-title">Game over!</p>
+        </div>
+        <canvas id="game-field" width="680" height="510"></canvas>
+    </div>
+</div>
+
+<script src="js/cube.js"></script>
+<script src="js/field.js"></script>
+<script src="js/canvas-renderer.js"></script>
+<script src="js/game-view.js"></script>
+<script src="js/emitter.js"></script>
+<script src="js/game.js"></script>
+<script src="js/init.js"></script>
+
+</body>
+</html>
