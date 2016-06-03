@@ -64,9 +64,8 @@ Game.prototype.blockRemove = function (pos) {
 
     this.totalScore += this.calcBlockCost(removedCount);
     this.view.updateTotalScore(this.totalScore);
-
-    this.field.fallCubes();
-    this.field.stickColumnsTogether();
+    
+    this.field.fallAndStick();
 
     this.view.updateCubesCounters(this.field.getCubesCounters());
     this.view.renderField(this.field);

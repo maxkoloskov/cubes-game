@@ -158,43 +158,29 @@ Field.prototype.hasAvailableBlocks = function () {
     return false;
 };
 
-Field.prototype.fallCubes = function () {
+Field.prototype.fallAndStick = function () {
+    var yGapSize = 0;
+    var xGapSize = 0;
+
     for (var x = 0; x < this.sizeX; ++x) {
-        var holeSize = 0;
+
+        yGapSize = 0;
         for (var y = this.sizeY - 1; y >= 0; --y) {
             var cube = this.cubes[x][y];
             if (!cube) {
-                ++holeSize;
+                ++yGapSize;
                 continue;
             }
-            if (holeSize) {
+            if (xGapSize || yGapSize) {
                 this.moveCube(cube, {
-                    x: x,
-                    y: y + holeSize
+                    x: x - xGapSize,
+                    y: y + yGapSize
                 });
             }
         }
-    }
-};
 
-Field.prototype.stickColumnsTogether = function () {
-    var lastRowIndex = this.sizeY - 1;
-    var gapSize = 0;
-    for (var x = 0; x < this.sizeX; ++x) {
-        if (!this.cubes[x][lastRowIndex]) {
-            ++gapSize;
-            continue;
-        }
-        if (gapSize) {
-            for (var y = 0; y < this.sizeY; ++y) {
-                var cube = this.cubes[x][y];
-                if (cube) {
-                    this.moveCube(cube, {
-                        x: x - gapSize,
-                        y: y
-                    });
-                }
-            }
+        if (yGapSize == this.sizeY) {
+            ++xGapSize;
         }
     }
 };
