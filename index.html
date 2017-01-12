@@ -6,57 +6,59 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<div class="container">
+<div class="wrapper">
     <div class="header">
         <h1 class="title">Cubes Game</h1>
     </div>
-    <div class="info">
-        <div class="scores">
-            <div class="total-score">
-                Total score: <span id="total-score">0</span>
+    <div class="game-container">
+        <div class="game-panel">
+            <div class="scores">
+                <div class="total-score">
+                    Total score: <span id="total-score">0</span>
+                </div>
+                <div class="block-score">
+                    Block score: <span id="block-score">0</span>
+                </div>
             </div>
-            <div class="block-score">
-                Block score: <span id="block-score">0</span>
+            <div class="counters">
+                <div class="cube-counter">
+                    <div class="cube-pic cube-type-1"></div>
+                    <span class="cube-count" id="cc1">0</span>
+                </div>
+                <div class="cube-counter">
+                    <div class="cube-pic cube-type-2"></div>
+                    <span class="cube-count" id="cc2">0</span>
+                </div>
+                <div class="cube-counter">
+                    <div class="cube-pic cube-type-3"></div>
+                    <span class="cube-count" id="cc3">0</span>
+                </div>
+                <div class="cube-counter">
+                    <div class="cube-pic cube-type-4"></div>
+                    <span class="cube-count" id="cc4">0</span>
+                </div>
+                <div class="cube-counter">
+                    <div class="cube-pic cube-type-5"></div>
+                    <span class="cube-count" id="cc5">0</span>
+                </div>
             </div>
-        </div>
-        <div class="counters">
-            <div class="cube-counter">
-                <div class="cube-pic cube-type-1"></div>
-                <span class="cube-count" id="cc1">0</span>
-            </div>
-            <div class="cube-counter">
-                <div class="cube-pic cube-type-2"></div>
-                <span class="cube-count" id="cc2">0</span>
-            </div>
-            <div class="cube-counter">
-                <div class="cube-pic cube-type-3"></div>
-                <span class="cube-count" id="cc3">0</span>
-            </div>
-            <div class="cube-counter">
-                <div class="cube-pic cube-type-4"></div>
-                <span class="cube-count" id="cc4">0</span>
-            </div>
-            <div class="cube-counter">
-                <div class="cube-pic cube-type-5"></div>
-                <span class="cube-count" id="cc5">0</span>
-            </div>
+
+            <a id="btn-restart" class="btn">Restart</a>
+            <a id="btn-stepback" class="btn hide">
+                <span>↶</span>
+                <div id="stepback-count">3</div>
+            </a>
         </div>
 
-        <a id="btn-restart" class="btn">Restart</a>
-        <a id="btn-stepback" class="btn hide">
-            <span>↶</span>
-            <div id="stepback-count">3</div>
-        </a>
-    </div>
-
-    <div class="game" >
-        <div id="message-over" class="message-over hide">
-            <p class="message-title">Game over!</p>
-            <p class="message-body">
-                Congratulations! You've earned a good score.
-            </p>
+        <div class="game-field-container">
+            <div id="message-over" class="message-over hide">
+                <p class="message-title">Game over</p>
+                <p class="message-body">
+                    Congratulations! You've earned a good score.
+                </p>
+            </div>
+            <canvas id="game-field" width="678" height="508"></canvas>
         </div>
-        <canvas id="game-field" width="678" height="508"></canvas>
     </div>
 </div>
 
