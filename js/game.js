@@ -68,7 +68,10 @@ Game.prototype.blockRemove = function (pos) {
 
     var removedCount = this.field.removeBlock(pos);
 
-    if (!removedCount) return;
+    if (!removedCount) {
+        this.restoreState();
+        return;
+    }
 
     this.totalScore += this.calcBlockCost(removedCount);
     this.field.fallAndStick();
