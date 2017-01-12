@@ -52,25 +52,59 @@ body {
     font-size: 26px;
 }
 
-#btn-restart {
-    float: right;
+.btn {
     padding: 0 20px;
     display: block;
     cursor: pointer;
     line-height: 44px;
     border-radius: 3px;
-    margin: 10px 40px 10px 20px;
     font-weight: bold;
 
     background: #cdc0b0;
     border: 3px solid #8b8378;
     color: #333;
+    transition: background,border-color 0.6s ease-out 0s;
 }
 
-#btn-restart:hover {
+.btn:hover {
     background: #8b8378;
     border-color: #cdc0b0;
     color: #ddd;
+}
+
+#btn-restart {
+    float: right;
+    margin: 10px 5px;
+    margin-right: 20px;
+}
+
+#btn-stepback {
+    position: relative;
+    float: right;
+    margin: 10px 5px;
+    font-size: 1.15em;
+    animation: fade-in 0.6s ease;
+}
+
+#stepback-count {
+    position: absolute;
+    right: -7px;
+    bottom: -8px;
+    width: 22px;
+    height: 22px;
+    padding: 0px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: normal;
+    line-height: 20px;
+    background: #e74c3c;
+    color: #ddd;
+    border-radius: 100%;
+    transition: opacity 0.6s ease-out 0s;
+}
+
+#btn-stepback:hover #stepback-count {
+    opacity: 0.6;
 }
 
 .counters {
@@ -128,7 +162,6 @@ body {
 }
 
 .message-over {
-    display: none;
     position: absolute;
     top: 3px;
     bottom: 7px;
@@ -148,6 +181,10 @@ body {
     font-size: 50px;
 }
 
+.hide {
+    display: none;
+}
+
 @keyframes fade-in {
     0% {
         opacity: 0;
@@ -155,10 +192,6 @@ body {
     100% {
         opacity: 1;
     }
-}
-
-.message-over.show {
-    display: block;
 }
 
 #game-field {

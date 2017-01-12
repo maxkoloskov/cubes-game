@@ -17,6 +17,8 @@ GameView.prototype.cache = function () {
     this.$totalScore = this.$('total-score');
     this.$field = this.$(this.fieldRenderer.elementId);
     this.$btnRestart = this.$('btn-restart');
+    this.$btnStepBack = this.$('btn-stepback');
+    this.$stepsBackCounter = this.$('stepback-count');
     this.$cubesCounters = [];
     for (var i = 0, len = this.fieldRenderer.cubesColors.length; i < len; ++i) {
         this.$cubesCounters[i] = this.$('cc' + (i + 1));
@@ -41,6 +43,10 @@ GameView.prototype.listen = function () {
     this.$btnRestart.addEventListener('click', function () {
         self.events.emit('game:restart');
     });
+
+    this.$btnStepBack.addEventListener('click', function () {
+        self.events.emit('game:stepback');
+    });
 };
 
 GameView.prototype.updateCubesCounters = function (values) {
@@ -62,12 +68,24 @@ GameView.prototype.renderField = function (field) {
     this.fieldRenderer.render(field);
 };
 
-GameView.prototype.showOverMessage = function () {
-    this.$messageOver.classList.add('show');
+GameView.prototype.toggleOverMessage = function (on) {
+    if (on) {
+        this.$messageOver.classList.remove('hide');
+    } else {
+        this.$messageOver.classList.add('hide');
+    }
 };
 
-GameView.prototype.hideOverMessage = function () {
-    this.$messageOver.classList.remove('show');
+GameView.prototype.toggleStepBackButton = function (on) {
+    if (on) {
+        this.$btnStepBack.classList.remove('hide');
+    } else {
+        this.$btnStepBack.classList.add('hide');
+    }
+};
+
+GameView.prototype.updateStepsBackCounter = function (count) {
+    this.$stepsBackCounter.innerHTML = count;
 };
 
 GameView.prototype.render = function (data) {
@@ -75,9 +93,7 @@ GameView.prototype.render = function (data) {
     this.updateBlockScore(data.blockScore);
     this.updateTotalScore(data.totalScore);
     this.updateCubesCounters(data.cubesCounters);
-    if (data.over) {
-        this.showOverMessage();
-    } else {
-        this.hideOverMessage();
-    }
+    this.toggleOverMessage(data.over);
+    this.updateStepsBackCounter(data.stepsBack);
+    this.toggleStepBackButton(data.stepsBack > 0);
 };

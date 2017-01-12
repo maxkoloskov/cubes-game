@@ -42,11 +42,15 @@
             </div>
         </div>
 
-        <a id="btn-restart">Restart</a>
+        <a id="btn-restart" class="btn">Restart</a>
+        <a id="btn-stepback" class="btn hide">
+            <span>↶</span>
+            <div id="stepback-count">3</div>
+        </a>
     </div>
 
     <div class="game" >
-        <div id="message-over" class="message-over">
+        <div id="message-over" class="message-over hide">
             <p class="message-title">Game over!</p>
         </div>
         <canvas id="game-field" width="678" height="508"></canvas>
