@@ -1,3 +1,6 @@
+Field.CODE_SEQ_SEP   = ';';
+Field.CODE_PARTS_SEP = '.';
+
 function Field(size, cubesColors) {
     this.sizeX = size[0];
     this.sizeY = size[1];
@@ -21,6 +24,67 @@ Field.prototype.build = function () {
             ++this.cubesCounters[cubesColorsIndex];
         }
     }
+};
+
+Field.prototype.save = function () {
+    var fieldCode = "";
+
+    var seqColorIndex = -1;
+    var seqLength = 0;
+
+    var self = this;
+
+    this.forEachCube(function (cube) {
+        var colorIndex = cube ? self.cubesColors.indexOf(cube.color) : -1
+
+        if (!seqLength) {
+            seqColorIndex = colorIndex;
+            seqLength = 1;
+            return;
+        }
+
+        if (colorIndex == seqColorIndex) {
+            ++seqLength;
+        } else {
+            fieldCode += seqColorIndex + Field.CODE_PARTS_SEP + seqLength + Field.CODE_SEQ_SEP;
+            seqColorIndex = colorIndex;
+            seqLength = 1;
+        }
+    });
+
+    fieldCode += seqColorIndex + Field.CODE_PARTS_SEP + seqLength;
+
+    return fieldCode;
+};
+
+Field.prototype.restore = function (fieldCode) {
+    var sequences = fieldCode.split(Field.CODE_SEQ_SEP);
+
+    this.cubesCounters = this.cubesCounters.map(function () {
+        return 0;
+    });
+
+    var cubeIndex = 0;
+    var self = this;
+
+    sequences.forEach(function (seq) {
+        var parts = seq.split(Field.CODE_PARTS_SEP);
+        var colorIndex = parts[0];
+        var count = parts[1];
+
+        while (count--) {
+            var x = Math.floor(cubeIndex / self.sizeY);
+            var y = cubeIndex % self.sizeY;
+
+            if (colorIndex == -1) {
+                self.cubes[x][y] = null;
+            } else {
+                self.cubes[x][y] = new Cube({x: x, y: y}, self.cubesColors[colorIndex]);
+                ++self.cubesCounters[colorIndex];
+            }
+            ++cubeIndex;
+        }
+    });
 };
 
 Field.prototype.unselectAll = function () {
